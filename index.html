@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + Vue + TS</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+        window.process = {
+          env: {
+                NODE_ENV: "development"
+          }
+        };
+        function updateStyle(content) {
+          const isExist = typeof CSSStyleSheet !== undefined;
+          if(isExist) {
+              let cssStyleSheet = new CSSStyleSheet();
+              cssStyleSheet.replaceSync(content);
+              document.adoptedStyleSheets = [
+                ...document.adoptedStyleSheets,
+                cssStyleSheet
+            ]
+          } else {
+            let style = document.createElement('style');
+            style.setAttribute('type', 'text/css');
+            style.innerHTML = content;
+            document.head.appendChild(style);
+          }
+      }
+    </script>
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
